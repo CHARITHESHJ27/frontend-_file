@@ -95,7 +95,7 @@
 
         async function logActivity(productId, activityType) {
             try {
-                const response = await fetch('http://localhost:8000/log_activity', {
+                const response = await fetch(	'https://bro4back.onrender.com/log_activity', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -116,7 +116,7 @@
 
         async function fetchProductDetails(productId) {
             try {
-                const response = await fetch(`http://localhost:8000/product/${productId}`, {
+                const response = await fetch(`	https://bro4back.onrender.com/product/${productId}`, {
                     headers: { 'X-API-Key': 'wymi-secret-key' }
                 });
                 if (!response.ok) throw new Error(`Fetch product failed: ${response.status}`);
@@ -143,7 +143,7 @@
 
         async function fetchRecommendations(productId, userId) {
             try {
-                const response = await fetch(`http://localhost:8000/product/${productId}/recommend?user_id=${userId}`, {
+                const response = await fetch(`	https://bro4back.onrender.com/product/${productId}/recommend?user_id=${userId}`, {
                     headers: { 'X-API-Key': 'wymi-secret-key' }
                 });
                 if (!response.ok) throw new Error(`Fetch recommendations failed: ${response.status}`);
@@ -191,7 +191,7 @@
             if (action === 'buy') {
                 try {
                     const product = products.find(p => p.product_id === productId);
-                    const response = await fetch('http://localhost:8001/insert_order', {
+                    const response = await fetch('	https://bro4back.onrender.com/insert_order', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
