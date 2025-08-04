@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    //production rul api connection
     const userId = localStorage.getItem('userId') || '100';
-    const API_BASE_URL = 'http://localhost:8000';
-    const ORDER_API_URL = 'http://localhost:8001';
-    const API_KEY = 'wymi-secret-key';
-    const FRONTEND_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = 'https://bro4back.onrender.com';
+    const ORDER_API_URL = 'https://bro4back.onrender.com';  // same backend if it handles orders too
+    const FRONTEND_BASE_URL = 'https://frontend-file-14jc9q2pi-cherrys-projects-107437d7.vercel.app';
 
     const products = [
         { product_id: 1, category: 'Rings', material: 'Gold-Plated', price: 436, image: 'https://rubans.in/cdn/shop/files/rubans-18k-gold-plated-bow-design-adjustable-ring-with-cubic-zirconia-stones-for-women-finger-ring-1165374885.jpg?v=1750329619&width=1080' },
