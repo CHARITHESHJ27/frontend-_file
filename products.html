@@ -19,6 +19,52 @@
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
+
+<script>
+(function () {
+  const userId = localStorage.getItem("userId");
+  const API_BASE = "https://bro4back.onrender.com";
+
+  function logEvent(eventType, details = {}) {
+    fetch(`${API_BASE}/track_event`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": "wymi-secret-key"
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        event_type: eventType,
+        element: details.element || null,
+        scroll_position: details.scrollY || null,
+        page_url: window.location.href,
+        timestamp: new Date().toISOString()
+      })
+    }).catch((err) => console.error("Tracking failed:", err));
+  }
+
+  // Click tracking
+  document.addEventListener("click", (e) => {
+    logEvent("click", { element: e.target.tagName });
+  });
+
+  // Scroll tracking (throttled)
+  let lastScroll = 0;
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    if (Math.abs(scrollY - lastScroll) > 50) {
+      lastScroll = scrollY;
+      logEvent("scroll", { scrollY });
+    }
+  });
+
+  // Hover tracking (optional)
+  document.addEventListener("mouseover", (e) => {
+    logEvent("hover", { element: e.target.tagName });
+  });
+})();
+</script>
+
 <body class="bg-gray-900 text-white font-roboto">
     <header class="bg-black py-4 shadow-lg">
         <div class="container mx-auto px-4 flex justify-between items-center">
